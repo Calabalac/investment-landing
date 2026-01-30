@@ -1,17 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #0F172A;
+  --color-primary-foreground: #F8FAFC;
+
+  --color-secondary: #F1F5F9;
+  --color-secondary-foreground: #0F172A;
+
+  --color-accent: #D97706;
+  --color-accent-hover: #B45309;
+
+  --color-gold-500: #EAB308;
+  --color-gold-600: #CA8A04;
+}
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #0f172a;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+    --background: 255 255 255;
+    --foreground: 15 23 42;
   }
 }
 
@@ -20,6 +29,11 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  @apply antialiased;
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }
