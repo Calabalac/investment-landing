@@ -1,67 +1,81 @@
-"use client";
-
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
-import { Check, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, Send } from "lucide-react";
 
-export function HeroSection() {
+export function Hero() {
     return (
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-            {/* Background Image Placeholder */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/40 z-10" />
-                {/* Placeholder for real image: Add 'bg-[url(/path/to/image.jpg)]' or <Image /> tag later */}
-                <div className="w-full h-full bg-slate-800 bg-[url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center" />
+        <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-16 text-center sm:px-8">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 -z-20 h-full w-full overflow-hidden">
+                <img
+                    src="/img/1-.jpg"
+                    alt="SADOA Apartments"
+                    className="h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
             </div>
 
-            <Container className="relative z-20 pt-20 pb-16">
-                <div className="max-w-3xl text-white">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-wider text-amber-400 uppercase bg-amber-500/10 rounded-full border border-amber-500/20 backdrop-blur-sm">
-                            Инвестиции в недвижимость напрямую от застройщика
-                        </span>
-
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold leading-tight mb-6">
-                            Апарт-отели в Украине — готовый бизнес с доходностью <span className="text-amber-400">10–14% годовых</span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-slate-200 mb-8 font-light">
-                            Без посредников • Без комиссии • Конфиденциально
-                        </p>
-
-                        <ul className="grid gap-3 mb-10 text-lg">
-                            {[
-                                "Гарантированный доход",
-                                "Управляющая компания",
-                                "Рассрочка без удорожания",
-                            ].map((item, index) => (
-                                <li key={index} className="flex items-center gap-3 text-slate-100">
-                                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                                        <Check className="w-4 h-4 text-emerald-400" />
-                                    </div>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                            <Button size="xl" variant="primary" className="text-lg w-full sm:w-auto font-semibold group">
-                                Получить презентацию от застройщика
-                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </div>
-
-                        <p className="text-slate-400 text-sm max-w-md">
-                            Оставьте заявку — свяжемся и отправим расчёт доходности
-                        </p>
-                    </motion.div>
+            {/* Content */}
+            <div className="glass-card container relative z-10 mx-auto max-w-4xl  rounded-3xl border-white/10 bg-black/30 p-8 shadow-2xl backdrop-blur-md sm:p-12">
+                <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md">
+                    <span className="mr-2 flex h-2 w-2 rounded-full bg-green-500"></span>
+                    Старт продажу!
                 </div>
-            </Container>
+
+                <h1 className="font-heading mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+                    Інвестуйте в <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-500 to-amber-600">
+                        SADOA
+                    </span>
+                </h1>
+
+                <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-200 sm:text-xl">
+                    Апарт-готель з гарантованою прибутковістю <span className="font-bold text-white">10–14% річних</span>.
+                    Ваша пасивна інвестиція в нерухомість.
+                </p>
+
+                <div className="flex flex-col items-center gap-4 sm:flex-col sm:justify-center md:flex-row">
+                    <Button
+                        asChild
+                        size="lg"
+                        className="h-14 w-full rounded-2xl bg-gradient-to-r from-gold-500 to-amber-600 px-8 text-lg font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:scale-105 hover:from-gold-600 hover:to-amber-700 sm:w-auto"
+                    >
+                        <Link href="#lead-form">
+                            Отримати розрахунок
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                    </Button>
+
+                    <Button
+                        asChild
+                        variant="outline"
+                        size="lg"
+                        className="glass-button h-14 w-full rounded-2xl border-white/20 px-8 text-lg font-medium text-white hover:bg-white/20 sm:w-auto"
+                    >
+                        <Link href="https://t.me/Andrei_21777" target="_blank">
+                            <Send className="mr-2 h-5 w-5" />
+                            Telegram
+                        </Link>
+                    </Button>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
+                    <div>
+                        <div className="text-2xl font-bold text-white sm:text-3xl">12%</div>
+                        <div className="text-xs text-slate-400 sm:text-sm">ROI</div>
+                    </div>
+                    <div>
+                        <div className="text-2xl font-bold text-white sm:text-3xl">$45k</div>
+                        <div className="text-xs text-slate-400 sm:text-sm">Вхід від</div>
+                    </div>
+                    <div>
+                        <div className="text-2xl font-bold text-white sm:text-3xl">TOP</div>
+                        <div className="text-xs text-slate-400 sm:text-sm">Локація</div>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }

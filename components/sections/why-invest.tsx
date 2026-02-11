@@ -1,68 +1,56 @@
-"use client";
-
-import { Container } from "@/components/ui/container";
-import { TrendingUp, Building2, Lock, Globe, Briefcase } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TrendingUp, ShieldCheck, MapPin, Wallet } from "lucide-react";
 
 const features = [
     {
-        title: "Доходность 10–14% годовых",
-        description: "Выше, чем у квартир и классической аренды, благодаря эффективной бизнес-модели.",
         icon: TrendingUp,
+        title: "Висока дохідність",
+        description: "Прогнозована річна дохідність від 10% до 14% у валюті при стабільному заповненні.",
     },
     {
-        title: "Профессиональное управление",
-        description: "Вы не занимаетесь поиском жильцов и ремонтом — всё делает управляющая компания.",
-        icon: Building2,
+        icon: ShieldCheck,
+        title: "Безпечна інвестиція",
+        description: "Нерухомість оформлюється у вашу повну власність. Усі документи перевірені юристами.",
     },
     {
-        title: "Гарантированные выплаты",
-        description: "Условия и сроки выплат четко прописаны в официальном договоре.",
-        icon: Lock,
+        icon: MapPin,
+        title: "Топова локація",
+        description: "Розташування в туристичному центрі забезпечує постійний потік гостей цілий рік.",
     },
     {
-        title: "Высокий туристический спрос",
-        description: "Локация обеспечивает постоянный поток гостей круглый год.",
-        icon: Globe,
-    },
-    {
-        title: "Готовый бизнес",
-        description: "Вы покупаете не просто квадратные метры, а работающий актив под ключ.",
-        icon: Briefcase,
+        icon: Wallet,
+        title: "Пасивний дохід",
+        description: "Керуюча компанія бере на себе всі турботи: від пошуку гостей до прибирання.",
     },
 ];
 
-export function WhyInvestSection() {
+export function WhyInvest() {
     return (
-        <section className="py-24 bg-slate-50">
-            <Container>
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-6">
-                        Почему апарт-отель выгоднее квартиры и коммерции
-                    </h2>
-                    <p className="text-xl text-slate-600 font-medium">
-                        Сегодня самая доходная и стабильная недвижимость — это апарт-отели
-                    </p>
-                </div>
+        <section className="container relative py-20 sm:py-32">
+            <div className="mb-16 text-center">
+                <h2 className="font-heading mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+                    Чому варто інвестувати?
+                </h2>
+                <p className="mx-auto max-w-2xl text-slate-400">
+                    Ми пропонуємо не просто квадратні метри, а готовий бізнес-інструмент, що працює на вас.
+                </p>
+            </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
-                        <div
-                            key={index}
-                            className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-slate-100"
-                        >
-                            <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-6">
-                                <feature.icon className="w-6 h-6 text-indigo-600" />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {features.map((feature, index) => (
+                    <Card key={index} className="glass-card border-white/5 bg-white/5 transition-all hover:-translate-y-1 hover:bg-white/10 hover:shadow-2xl hover:shadow-primary/5">
+                        <CardHeader>
+                            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-gold-500 to-amber-600 text-white shadow-lg shadow-amber-500/20">
+                                <feature.icon className="h-6 w-6" />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">
-                                {feature.title}
-                            </h3>
-                            <p className="text-slate-600 leading-relaxed">
-                                {feature.description}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </Container>
+                            <CardTitle className="text-xl text-white">{feature.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-sm text-slate-400">{feature.description}</p>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
         </section>
     );
 }
