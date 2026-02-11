@@ -36,28 +36,30 @@ export function Hero() {
                         Ваша пасивна інвестиція в нерухомість.
                     </p>
 
-                    <Button
-                        asChild
-                        size="lg"
-                        className="h-14 w-full cursor-pointer touch-manipulation rounded-2xl bg-gradient-to-r from-gold-500 to-amber-600 px-8 text-lg font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:scale-105 hover:from-gold-600 hover:to-amber-700 sm:w-auto"
-                    >
-                        <Link href="#lead-form" className="flex items-center justify-center gap-2">
-                            <span>Отримати розрахунок</span>
-                            <ArrowRight className="h-5 w-5" />
-                        </Link>
-                    </Button>
+                    <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+                        <Button
+                            asChild
+                            size="lg"
+                            className="h-14 w-full sm:min-w-[240px] cursor-pointer touch-manipulation rounded-2xl bg-gradient-to-r from-gold-500 to-amber-600 px-8 text-lg font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:scale-105 hover:from-gold-600 hover:to-amber-700 sm:w-auto"
+                        >
+                            <Link href="#lead-form" className="flex items-center justify-center gap-2">
+                                <span>Отримати розрахунок</span>
+                                <ArrowRight className="h-5 w-5" />
+                            </Link>
+                        </Button>
 
-                    <Button
-                        asChild
-                        variant="outline"
-                        size="lg"
-                        className="glass-button h-14 w-full cursor-pointer touch-manipulation rounded-2xl border-white/20 px-8 text-lg font-medium text-white hover:bg-white/20 sm:w-auto"
-                    >
-                        <Link href="https://t.me/Andrei_21777" target="_blank" className="flex items-center justify-center gap-2">
-                            <Send className="h-5 w-5" />
-                            <span>Telegram</span>
-                        </Link>
-                    </Button>
+                        <Button
+                            asChild
+                            variant="outline"
+                            size="lg"
+                            className="glass-button h-14 w-full sm:min-w-[200px] cursor-pointer touch-manipulation rounded-2xl border-white/20 px-8 text-lg font-medium text-white hover:bg-white/20 sm:w-auto"
+                        >
+                            <Link href="https://t.me/Andrei_21777" target="_blank" className="flex items-center justify-center gap-2">
+                                <Send className="h-5 w-5" />
+                                <span>Telegram</span>
+                            </Link>
+                        </Button>
+                    </div>
 
                     {/* Quick Stats */}
                     <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
