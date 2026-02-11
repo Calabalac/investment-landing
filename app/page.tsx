@@ -9,8 +9,8 @@ export default function Home() {
     <main className="flex min-h-screen flex-col overflow-hidden">
       <Hero />
       <WhyInvest />
-      <Gallery />
       <LeadForm />
+      <Gallery />
       <Footer />
     </main>
   );
