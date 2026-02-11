@@ -52,7 +52,7 @@ export function Hero() {
                             asChild
                             variant="outline"
                             size="lg"
-                            className="glass-button h-14 w-full sm:min-w-[200px] cursor-pointer touch-manipulation rounded-2xl border-white/20 px-8 text-lg font-medium text-white hover:bg-white/20 sm:w-auto"
+                            className="glass-button h-14 w-full sm:min-w-[240px] cursor-pointer touch-manipulation rounded-2xl border-white/20 px-8 text-lg font-medium text-white hover:bg-white/20 sm:w-auto"
                         >
                             <Link href="https://t.me/Andrei_21777" target="_blank" className="flex items-center justify-center gap-2">
                                 <Send className="h-5 w-5" />
