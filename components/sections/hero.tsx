@@ -25,9 +25,9 @@ export function Hero() {
                     </div>
 
                     <h1 className="font-heading mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-                        Інвестуйте в <br />
+                        Інвестуйте напряму через <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-500 to-amber-600">
-                            SADOA
+                            Будівельну компанію
                         </span>
                     </h1>
 
