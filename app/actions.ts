@@ -20,7 +20,7 @@ export async function sendLeadEmail(formData: FormData) {
     try {
         const { data, error } = await resend.emails.send({
             from: "onboarding@resend.dev", // Using Resend's onboarding email 
-            to: "ukr.ovchar@gmail.com", // Send to user's primary email 
+            to: ["ukr.ovchar@gmail.com", "sadovecandrei@gmail.com"],
             subject: `Нова заявка з сайту SADOA: ${name}`,
             text: `
         Нова заявка на інвестицію!
