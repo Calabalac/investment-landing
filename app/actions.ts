@@ -1,8 +1,7 @@
 "use server";
 
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 export async function sendLeadEmail(formData: FormData) {
     const name = formData.get("name") as string;
@@ -12,46 +11,37 @@ export async function sendLeadEmail(formData: FormData) {
         return { success: false, message: "Будь ласка, заповніть всі поля." };
     }
 
-    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_xxxxxxxxx') {
-        console.error("Resend API key is missing or is the default placeholder.");
-        return { success: false, message: "Помилка конфігурації: відсутній API ключ Resend." };
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+        console.error("Telegram bot token or chat ID is missing.");
+        return { success: false, message: "Помилка конфігурації сервера." };
     }
 
-    try {
-        const { data, error } = await resend.emails.send({
-            from: "onboarding@resend.dev", // Using Resend's onboarding email 
-            to: ["ukr.ovchar@gmail.com", "sadovecandrei@gmail.com"],
-            subject: `Нова заявка з сайту SADOA: ${name}`,
-            text: `
-        Нова заявка на інвестицію!
-        
-        Ім'я: ${name}
-        Телефон: ${phone}
-        
-        Дата: ${new Date().toLocaleString("uk-UA")}
-      `,
-            html: `
-        <h2>Нова заявка на інвестицію SADOA</h2>
-        <p><strong>Ім'я:</strong> ${name}</p>
-        <p><strong>Телефон:</strong> ${phone}</p>
-        <p><strong>Дата:</strong> ${new Date().toLocaleString("uk-UA")}</p>
-      `,
-        });
+    const message = `🏨 *Нова заявка SADOA*\n\n👤 *Ім'я:* ${name}\n📞 *Телефон:* ${phone}\n\n🕐 ${new Date().toLocaleString("uk-UA")}`;
 
-        if (error) {
-            console.error("Resend error details:", error);
-            return {
-                success: false,
-                message: `Помилка Resend: ${error.message}${error.name ? ` (${error.name})` : ''}. Перевірте налаштування.`
-            };
+    try {
+        const response = await fetch(
+            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: "Markdown",
+                }),
+            }
+        );
+
+        const result = await response.json();
+
+        if (!result.ok) {
+            console.error("Telegram API error:", result);
+            return { success: false, message: `Помилка Telegram: ${result.description}` };
         }
 
         return { success: true, message: "Заявка успішно відправлена!" };
     } catch (error: any) {
-        console.error("Unhandled email sending error:", error);
-        return {
-            success: false,
-            message: `Критична помилка: ${error.message || "Невідома помилка"}`
-        };
+        console.error("Unhandled error:", error);
+        return { success: false, message: `Критична помилка: ${error.message || "Невідома помилка"}` };
     }
 }
