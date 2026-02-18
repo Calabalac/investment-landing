@@ -12,10 +12,15 @@ export async function sendLeadEmail(formData: FormData) {
         return { success: false, message: "Будь ласка, заповніть всі поля." };
     }
 
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_xxxxxxxxx') {
+        console.error("Resend API key is missing or is the default placeholder.");
+        return { success: false, message: "Помилка конфігурації: відсутній API ключ Resend." };
+    }
+
     try {
         const { data, error } = await resend.emails.send({
-            from: "SADOA <onboarding@resend.dev>", // Note: Use verified domain in production
-            to: ["ukr.ovchar@gmail.com", "sadovecandrei@gmail.com"],
+            from: "onboarding@resend.dev", // Using Resend's onboarding email 
+            to: "ukr.ovchar@gmail.com", // Send to user's primary email 
             subject: `Нова заявка з сайту SADOA: ${name}`,
             text: `
         Нова заявка на інвестицію!
@@ -34,13 +39,19 @@ export async function sendLeadEmail(formData: FormData) {
         });
 
         if (error) {
-            console.error("Resend error:", error);
-            return { success: false, message: "Помилка при відправці. Спробуйте пізніше або напишіть у Telegram." };
+            console.error("Resend error details:", error);
+            return {
+                success: false,
+                message: `Помилка Resend: ${error.message}${error.name ? ` (${error.name})` : ''}. Перевірте налаштування.`
+            };
         }
 
         return { success: true, message: "Заявка успішно відправлена!" };
-    } catch (error) {
-        console.error("Email sending error:", error);
-        return { success: false, message: "Помилка при відправці. Спробуйте пізніше або напишіть у Telegram." };
+    } catch (error: any) {
+        console.error("Unhandled email sending error:", error);
+        return {
+            success: false,
+            message: `Критична помилка: ${error.message || "Невідома помилка"}`
+        };
     }
 }
